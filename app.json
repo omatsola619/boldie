@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.omatsola619.boldie"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "722b9798-22bb-49c2-b2cc-dd6d03997b7e"
+      }
+    },
+    "owner": "omatsola619"
   }
 }

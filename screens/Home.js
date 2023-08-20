@@ -1,7 +1,8 @@
-import { Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import sally from '../assets/image/press.png'
 import {COLORS} from '../utils/color'
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Home = ({navigation}) => {
     const [mytext, setMytext] = useState('')
@@ -24,7 +25,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
+      <ScrollView style={styles.wrapper}>
         <View style={styles.imageWrapper}>
           <Image source={sally} style={styles.sally} />
         </View>
@@ -54,7 +55,7 @@ const Home = ({navigation}) => {
                       aspectRatio: 1,
                       margin: 2,
                       borderRadius: 5,
-                      borderWidth: mycolor === item.code && 3,
+                      // borderWidth: mycolor === item.code && 3,
                       borderColor: mycolor === item.code && '#5452ed',
                     }}
                   ></View>
@@ -68,7 +69,7 @@ const Home = ({navigation}) => {
             <Text style={styles.submitTxt}>Preview</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

@@ -21,9 +21,6 @@ export const COLORS = [
     { name: 'indigo', code: '#4B0082' },
     { name: 'orchid', code: '#DA70D6' },
     { name: 'turquoise', code: '#40E0D0' },
-    { name: 'sienna', code: '#A0522D' },
-    { name: 'lavender', code: '#E6E6FA' },
-    { name: 'salmon', code: '#FA8072' },
     { name: 'sky blue', code: '#87CEEB' },
     { name: 'lime green', code: '#32CD32' },
   ];
