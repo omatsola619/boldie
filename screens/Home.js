@@ -18,20 +18,26 @@ const screenWidth = Dimensions.get('window').width
 
 const Home = ({ navigation }) => {
   const [mytext, setMytext] = useState("");
-  const [mycolor, setMyColor] = useState("#000000");
-  const majorColor = "#EC298C"
+  const [bg, setBg] = useState("#000000");
+  const [myTextColor, setMytextColor] = useState("");
+  const majorColor = "#EC298C";
 
   const handleText = (text) => {
     setMytext(text);
   };
 
-  const handleColor = (color) => {
-    setMyColor(color);
-  };
+  // const handleColor = (color) => {
+  //   setMyColor(color);
+  // };
+
+  const handleSelectTheme = ({textColor, bg}) => {
+      setMytextColor(textColor);
+      setBg(bg)
+  }
 
   const handleSumbit = () => {
     if (mytext !== "") {
-      const data = { mycolor, mytext };
+      const data = { bg, myTextColor, mytext };
       navigation.navigate("Preview", data);
     }
   };
@@ -49,13 +55,14 @@ const Home = ({ navigation }) => {
         <ScrollView style={styles.wrapper}>
           {/* form field  */}
           <View style={styles.form}>
-            <Text style={styles.intro}>Write for Me <Text style={{color: majorColor}}>Boldie</Text></Text>
+            <Text style={styles.intro}>Write for Me <Text style={{color: "rgba(255, 255, 255, 0.3)"}}>Boldie</Text></Text>
             <View style={styles.formField}>
               <TextInput
-                placeholder="Write here darling"
+                placeholder="Write here..."
                 style={styles.input}
                 value={mytext}
                 onChangeText={handleText}
+                maxLength={40}
               />
             </View>
 
@@ -64,7 +71,14 @@ const Home = ({ navigation }) => {
               <View style={styles.colorsArr}>
                 {
                   COLORS.map((item, i) => (
-                    <TouchableOpacity key={i} activeOpacity={0.8}>
+                    <TouchableOpacity 
+                      key={i} 
+                      activeOpacity={0.8}
+                      onPress={() => {
+                        setMytextColor(item.text);
+                        setBg(item.bg)
+                      }}
+                    >
                       <View style={{
                         width: (screenWidth - 57) / 2,
                         height: 35,

@@ -30,7 +30,7 @@ export default function App() {
           component={Preview}
           options={{
             headerShown: false,
-            orientation: 'landscape_left'
+            // orientation: 'landscape_left'
           }}
         />
       </Stack.Navigator>
