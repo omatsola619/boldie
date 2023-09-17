@@ -4,7 +4,6 @@ import { AntDesign } from '@expo/vector-icons';
 
 const Preview = ({route, navigation}) => {
     const {bg, myTextColor, mytext} = route.params;
-    console.log(mytext.trim().length)
     // create function pluse and minus button that would increase the font size of the text 
 
   return (

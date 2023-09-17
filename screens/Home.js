@@ -12,31 +12,40 @@ import {
 import React, { useState } from "react";
 import { COLORS } from "../utils/color";
 import BG from "../assets/image/grad1.png";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 
-const screenWidth = Dimensions.get('window').width
+const screenWidth = Dimensions.get("window").width;
 
 const Home = ({ navigation }) => {
   const [mytext, setMytext] = useState("");
-  const [bg, setBg] = useState("#000000");
+  const [bg, setBg] = useState("#000");
   const [myTextColor, setMytextColor] = useState("");
   const majorColor = "#EC298C";
+  const [textError, setTextError] = useState("");
 
   const handleText = (text) => {
     setMytext(text);
   };
 
-  // const handleColor = (color) => {
-  //   setMyColor(color);
-  // };
+  const checkTextField = () => {
+    let isTextValid = true;
 
-  const handleSelectTheme = ({textColor, bg}) => {
-      setMytextColor(textColor);
-      setBg(bg)
-  }
+    if (mytext.trim() === "") {
+      setTextError("This field is required");
+      isTextValid = false;
+    } else setTextError('')
+
+    return isTextValid;
+  };
+
+  const handleSelectTheme = ({ textColor, bg }) => {
+    setMytextColor(textColor);
+    setBg(bg);
+  };
 
   const handleSumbit = () => {
-    if (mytext !== "") {
+    if (checkTextField()) {
+      setTextError("");
       const data = { bg, myTextColor, mytext };
       navigation.navigate("Preview", data);
     }
@@ -55,7 +64,10 @@ const Home = ({ navigation }) => {
         <ScrollView style={styles.wrapper}>
           {/* form field  */}
           <View style={styles.form}>
-            <Text style={styles.intro}>Write for Me <Text style={{color: "rgba(255, 255, 255, 0.3)"}}>Boldie</Text></Text>
+            <Text style={styles.intro}>
+              Write for Me{" "}
+              <Text style={{ color: "rgba(255, 255, 255, 0.3)" }}>Boldie</Text>
+            </Text>
             <View style={styles.formField}>
               <TextInput
                 placeholder="Write here..."
@@ -64,54 +76,98 @@ const Home = ({ navigation }) => {
                 onChangeText={handleText}
                 maxLength={40}
               />
+              {textError ? (
+                <Text style={{ 
+                        color: 'red', 
+                        marginTop: 3,
+                        fontFamily: 'Roboto_400'
+                    }}>{textError}</Text>
+              ) : (
+                <Text
+                  style={{
+                    color: "rgba(255, 255, 255, 0.7)",
+                    marginTop: 3,
+                    fontFamily: 'Roboto_400'
+                  }}
+                >
+                  maximum of 40 characters
+                </Text>
+              )}
             </View>
 
             {/* color picker component  */}
             <View style={styles.colorPicker}>
               <View style={styles.colorsArr}>
-                {
-                  COLORS.map((item, i) => (
-                    <TouchableOpacity 
-                      key={i} 
-                      activeOpacity={0.8}
-                      onPress={() => {
-                        setMytextColor(item.text);
-                        setBg(item.bg)
-                      }}
-                    >
-                      <View style={{
+                {COLORS.map((item, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      setMytextColor(item.text);
+                      setBg(item.bg);
+                    }}
+                  >
+                    <View
+                      style={{
                         width: (screenWidth - 57) / 2,
                         height: 35,
                         backgroundColor: item.bg,
-                        alignItems: 'flex-end',
-                        justifyContent: 'flex-end',
-                      }}>
-                        <Text style={{
+                        alignItems: "flex-end",
+                        justifyContent: "flex-end",
+                        position: "relative",
+                      }}
+                    >
+                      {bg === item.bg && (
+                        <AntDesign
+                          name="checkcircle"
+                          size={20}
+                          color="white"
+                          style={{
+                            position: "absolute",
+                            left: "5%",
+                            bottom: "20%",
+                          }}
+                        />
+                      )}
+                      <Text
+                        style={{
                           padding: 5,
                           fontSize: 14,
-                          color: item.text
-                        }}>{item.name}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  ))
-                }
+                          color: item.text,
+                        }}
+                      >
+                        {item.name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
               </View>
             </View>
 
             {/* submit button  */}
             <View style={styles.submitWrapper}>
               <TouchableOpacity
-              onPress={handleSumbit}
-              activeOpacity={0.8}
-              style={styles.submit}
-
-            >
-              <AntDesign name="arrowright" size={25} color={majorColor} />
-            </TouchableOpacity>
+                onPress={handleSumbit}
+                activeOpacity={0.8}
+                style={styles.submit}
+              >
+                <AntDesign name="arrowright" size={25} color={majorColor} />
+              </TouchableOpacity>
             </View>
-            
           </View>
         </ScrollView>
+        <Text
+          style={{
+            position: "absolute",
+            top: "5%",
+            right: "4%",
+            fontFamily: "Zeyada",
+            fontSize: 18,
+            color: "rgba(255, 255, 255, 0.5)",
+          }}
+        >
+          V.2 by Omash
+        </Text>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -122,7 +178,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#5452ed'
+    // backgroundColor: '#5452ed',
+    position: "relative",
   },
   wrapper: {
     flex: 1,
@@ -149,7 +206,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 15,
     fontSize: 20,
-    fontFamily: 'Roboto_400'
+    fontFamily: "Roboto_400",
   },
   formField: {
     marginBottom: 20,
@@ -164,14 +221,14 @@ const styles = StyleSheet.create({
   },
   colorsArr: {
     padding: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "flex-start",
-    gap: 5
+    gap: 5,
   },
   submitWrapper: {
     marginTop: 40,
-    alignItems: 'center',
+    alignItems: "center",
   },
   submit: {
     width: 70,
