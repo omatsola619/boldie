@@ -75,6 +75,7 @@ const Home = ({ navigation }) => {
                 value={mytext}
                 onChangeText={handleText}
                 maxLength={40}
+                selectionColor={'white'}
               />
               {textError ? (
                 <Text style={{ 
