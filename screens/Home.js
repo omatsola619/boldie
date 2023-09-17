@@ -1,5 +1,5 @@
 import {
-  Image,
+  Dimensions,
   ImageBackground,
   SafeAreaView,
   StyleSheet,
@@ -10,12 +10,11 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import sally from "../assets/image/press.png";
 import { COLORS } from "../utils/color";
-import { LinearGradient } from "expo-linear-gradient";
-import BG from "../assets/image/grad3.png";
+import BG from "../assets/image/grad1.png";
 import { AntDesign } from '@expo/vector-icons';
 
+const screenWidth = Dimensions.get('window').width
 
 const Home = ({ navigation }) => {
   const [mytext, setMytext] = useState("");
@@ -50,10 +49,10 @@ const Home = ({ navigation }) => {
         <ScrollView style={styles.wrapper}>
           {/* form field  */}
           <View style={styles.form}>
-            <Text style={styles.intro}>Write for Me <Text style={{color: majorColor}}>Boldie</Text> </Text>
+            <Text style={styles.intro}>Write for Me <Text style={{color: majorColor}}>Boldie</Text></Text>
             <View style={styles.formField}>
               <TextInput
-                placeholder="Input Text"
+                placeholder="Write here darling"
                 style={styles.input}
                 value={mytext}
                 onChangeText={handleText}
@@ -63,25 +62,25 @@ const Home = ({ navigation }) => {
             {/* color picker component  */}
             <View style={styles.colorPicker}>
               <View style={styles.colorsArr}>
-                {COLORS.map((item, i) => (
-                  <TouchableOpacity
-                    key={i}
-                    onPress={() => handleColor(item.code)}
-                  >
-                    <View
-                      style={{
-                        backgroundColor: item.code,
-                        width: 35,
+                {
+                  COLORS.map((item, i) => (
+                    <TouchableOpacity key={i} activeOpacity={0.8}>
+                      <View style={{
+                        width: (screenWidth - 57) / 2,
                         height: 35,
-                        aspectRatio: 1,
-                        margin: 2,
-                        borderRadius: 5,
-                        // borderWidth: mycolor === item.code && 3,
-                        borderColor: mycolor === item.code && "#5452ed",
-                      }}
-                    ></View>
-                  </TouchableOpacity>
-                ))}
+                        backgroundColor: item.bg,
+                        alignItems: 'flex-end',
+                        justifyContent: 'flex-end',
+                      }}>
+                        <Text style={{
+                          padding: 5,
+                          fontSize: 14,
+                          color: item.text
+                        }}>{item.name}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  ))
+                }
               </View>
             </View>
 
@@ -131,27 +130,30 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    height: 70,
-    backgroundColor: "#f2f2f2",
+    height: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
     borderRadius: 8,
     paddingLeft: 15,
-    fontSize: 25
+    fontSize: 20,
+    fontFamily: 'Roboto_400'
   },
   formField: {
     marginBottom: 20,
   },
   colorPicker: {
+    flex: 1,
     width: "100%",
-    height: 250,
+    height: 255,
     marginTop: 40,
-    backgroundColor: "white",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     borderRadius: 8,
   },
   colorsArr: {
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "space-between",
     padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: "flex-start",
+    gap: 5
   },
   submitWrapper: {
     marginTop: 40,
