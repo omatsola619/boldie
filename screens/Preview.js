@@ -38,7 +38,6 @@ export default Preview;
 
 const styles = StyleSheet.create({
     txt: {
-        fontSize: 100,
         fontFamily: 'Roboto_700',
         paddingHorizontal: 10,
         lineHeight: 170
