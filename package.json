@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
+    "@expo-google-fonts/roboto-condensed": "^0.2.3",
     "@expo-google-fonts/zeyada": "^0.2.3",
     "@react-native-community/slider": "^4.4.2",
     "@react-navigation/native": "^6.1.7",
