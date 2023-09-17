@@ -6,6 +6,7 @@ const Preview = ({route, navigation}) => {
     const {bg, myTextColor, mytext} = route.params;
     // create function pluse and minus button that would increase the font size of the text 
 
+    const newcolor = myTextColor;
   return (
     <SafeAreaView 
       style={{
@@ -15,7 +16,7 @@ const Preview = ({route, navigation}) => {
         justifyContent: 'center',
         position: 'relative'
       }}>
-      <Text style={[styles.txt, {color: myTextColor, fontSize: mytext.trim().length <= 20 ? 170 : 110}]}>{mytext}</Text>
+      <Text style={[styles.txt, {color: newcolor, fontSize: mytext.trim().length <= 20 ? 170 : 110}]}>{mytext}</Text>
       <TouchableOpacity 
         onPress={() => navigation.goBack()}
         activeOpacity={0.7}
@@ -26,7 +27,6 @@ const Preview = ({route, navigation}) => {
         paddingVertical: 5,
         paddingHorizontal: 7,
         backgroundColor: myTextColor,
-        
       }}>
         <AntDesign name="arrowleft" size={34} color={bg} />
       </TouchableOpacity>
@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     txt: {
         fontFamily: 'Roboto_700',
         paddingHorizontal: 10,
-        lineHeight: 170
+        lineHeight: 170,
     }
 })

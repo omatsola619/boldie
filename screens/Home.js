@@ -19,7 +19,7 @@ const screenWidth = Dimensions.get("window").width;
 const Home = ({ navigation }) => {
   const [mytext, setMytext] = useState("");
   const [bg, setBg] = useState("#000");
-  const [myTextColor, setMytextColor] = useState("");
+  const [myTextColor, setMytextColor] = useState("#FFF");
   const majorColor = "#EC298C";
   const [textError, setTextError] = useState("");
 
@@ -61,7 +61,7 @@ const Home = ({ navigation }) => {
       }}
     >
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.wrapper}>
+        <ScrollView style={styles.wrapper} keyboardShouldPersistTaps="handled">
           {/* form field  */}
           <View style={styles.form}>
             <Text style={styles.intro}>
